@@ -8,8 +8,12 @@ import streamlit as st
 import numpy as np
 import pickle
 
-st.set_page_config(page_title="Crop Recommendation System", layout="centered")
-
+st.set_page_config(
+    page_title="AgroPredict - Crop Recommendation System",
+    page_icon="🌱",
+    layout="centered",   # or "wide" if you want full screen
+    initial_sidebar_state="auto"
+)
 st.title("🌾 Crop Recommendation System")
 st.write("Enter all soil and weather values to get an accurate crop recommendation.")
 
