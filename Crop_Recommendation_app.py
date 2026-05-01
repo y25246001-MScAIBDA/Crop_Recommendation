@@ -18,7 +18,7 @@ st.set_page_config(
 
 st.set_page_config(page_title="Crop Recommendation System", layout="centered")
 
-st.title("🌾 Crop Recommendation System")
+st.title=("🌱 Crop Recommendation System")
 st.write("Enter all soil and weather values to get an accurate crop recommendation.")
 
 # Load saved models
