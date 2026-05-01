@@ -14,7 +14,7 @@ st.set_page_config(
     layout="centered",   # or "wide" if you want full screen
     initial_sidebar_state="auto"
 )
-st.title("🌾 Crop Recommendation System")
+st.title("🌱Crop Recommendation System")
 st.write("Enter all soil and weather values to get an accurate crop recommendation.")
 
 # Load saved models
