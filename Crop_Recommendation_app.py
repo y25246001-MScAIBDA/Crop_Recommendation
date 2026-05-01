@@ -9,6 +9,13 @@ import streamlit as st
 import numpy as np
 import pickle
 
+st.set_page_config(
+    page_title="AgroPredict | AI Crop Recommendation",
+    page_icon="🌱",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 st.set_page_config(page_title="Crop Recommendation System", layout="centered")
 
 st.title("🌾 Crop Recommendation System")
@@ -60,7 +67,5 @@ if st.button("Predict Crop"):
         st.success(f"🌱 Recommended Crop: {prediction[0]}")
 
 # Footer
-st.write("---")
-st.write("Developed using Streamlit & Machine Learning")
 st.write("---")
 st.write("Developed using Streamlit & Machine Learning")
