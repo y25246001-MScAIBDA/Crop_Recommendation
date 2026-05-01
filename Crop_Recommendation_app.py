@@ -20,6 +20,31 @@ def load_models():
     minmax = pickle.load(open("minmaxscaler.pkl", "rb"))
     standard = pickle.load(open("standscaler.pkl", "rb"))
     return model, minmax, standard
+# Label mapping (EDIT THIS according to your dataset)
+crop_dict = {
+    0: "Rice",
+    1: "Maize",
+    2: "Chickpea",
+    3: "Kidney Beans",
+    4: "Pigeon Peas",
+    5: "Moth Beans",
+    6: "Mung Bean",
+    7: "Black Gram",
+    8: "Lentil",
+    9: "Pomegranate",
+    10: "Banana",
+    11: "Mango",
+    12: "Grapes",
+    13: "Watermelon",
+    14: "Muskmelon",
+    15: "Apple",
+    16: "Orange",
+    17: "Papaya",
+    18: "Coconut",
+    19: "Cotton",
+    20: "Jute",
+    21: "Coffee"
+}
 
 try:
     model, minmax, standard = load_models()
@@ -55,8 +80,12 @@ if st.button("Predict Crop"):
         input_data = minmax.transform(input_data)
         input_data = standard.transform(input_data)
 
-        prediction = model.predict(input_data)
-        st.success(f"🌱 Recommended Crop: {prediction[0]}")
+        prediction = model.predict(input_data)[0]
+
+        # Convert number to crop name
+        crop_name = crop_dict.get(prediction, "Unknown Crop")
+
+        st.success(f"🌱 Recommended Crop: {crop_name}")
 
 # Footer
 st.write("---")
