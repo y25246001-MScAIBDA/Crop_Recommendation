@@ -12,7 +12,7 @@ import pickle
 st.set_page_config(page_title="Crop Recommendation System", layout="centered")
 
 st.title("🌾 Crop Recommendation System")
-st.write("Enter soil and weather conditions to get the best crop recommendation.")
+st.write("Enter all soil and weather values to get an accurate crop recommendation.")
 
 # Load saved models
 @st.cache_resource
@@ -25,32 +25,42 @@ def load_models():
 try:
     model, minmax, standard = load_models()
 except:
-    st.error("Model or scaler files not found. Please make sure model.pkl, minmaxscaler.pkl, and standscaler.pkl are in the same folder.")
+    st.error("Required files (model.pkl, minmaxscaler.pkl, standscaler.pkl) not found.")
     st.stop()
 
 # User Inputs
 st.subheader("Enter Input Values")
 
-N = st.number_input("Nitrogen (N)", min_value=0.0)
-P = st.number_input("Phosphorus (P)", min_value=0.0)
-K = st.number_input("Potassium (K)", min_value=0.0)
-temperature = st.number_input("Temperature (°C)")
-humidity = st.number_input("Humidity (%)")
-ph = st.number_input("pH Value")
-rainfall = st.number_input("Rainfall (mm)")
+N = st.number_input("Nitrogen (N)", min_value=0.0, value=None, placeholder="Enter Nitrogen value")
+P = st.number_input("Phosphorus (P)", min_value=0.0, value=None, placeholder="Enter Phosphorus value")
+K = st.number_input("Potassium (K)", min_value=0.0, value=None, placeholder="Enter Potassium value")
+temperature = st.number_input("Temperature (°C)", value=None, placeholder="Enter Temperature")
+humidity = st.number_input("Humidity (%)", value=None, placeholder="Enter Humidity")
+ph = st.number_input("pH Value", value=None, placeholder="Enter pH value")
+rainfall = st.number_input("Rainfall (mm)", value=None, placeholder="Enter Rainfall")
+
+# Check if all inputs are filled
+def all_inputs_filled(values):
+    return all(v is not None for v in values)
 
 # Prediction
 if st.button("Predict Crop"):
-    input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
+    inputs = [N, P, K, temperature, humidity, ph, rainfall]
     
-    # Apply scalers (same order as training)
-    input_data = minmax.transform(input_data)
-    input_data = standard.transform(input_data)
+    if not all_inputs_filled(inputs):
+        st.warning("⚠️ Please fill all input fields before prediction.")
+    else:
+        input_data = np.array([inputs])
+        
+        # Apply scalers
+        input_data = minmax.transform(input_data)
+        input_data = standard.transform(input_data)
 
-    prediction = model.predict(input_data)
-
-    st.success(f"🌱 Recommended Crop: {prediction[0]}")
+        prediction = model.predict(input_data)
+        st.success(f"🌱 Recommended Crop: {prediction[0]}")
 
 # Footer
+st.write("---")
+st.write("Developed using Streamlit & Machine Learning")
 st.write("---")
 st.write("Developed using Streamlit & Machine Learning")
