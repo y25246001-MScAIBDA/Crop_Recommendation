@@ -10,10 +10,10 @@ import numpy as np
 import pickle
 
 st.set_page_config(
-    page_title="AgroPredict | AI Crop Recommendation",
-    page_icon="🌱",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    page_title="AgroPredict - Crop Recommendation System",
+    page_icon="🌾",
+    layout="centered",   # or "wide" if you want full screen
+    initial_sidebar_state="auto"
 )
 
 st.set_page_config(page_title="Crop Recommendation System", layout="centered")
