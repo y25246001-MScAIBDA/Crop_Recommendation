@@ -11,7 +11,7 @@ import pickle
 
 st.set_page_config(
     page_title="AgroPredict - Crop Recommendation System",
-    page_icon="🌾",
+    page_icon="🌱",
     layout="centered",   # or "wide" if you want full screen
     initial_sidebar_state="auto"
 )
